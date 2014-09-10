@@ -3,7 +3,7 @@ class CreateTags < ActiveRecord::Migration
     create_table :tags do |t|
       t.timestamps
 
-      t.integer :category_id
+      t.references :category, index: true, null: false
       t.string  :name
       t.integer :media_count, limit: 8
     end

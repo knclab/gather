@@ -22,16 +22,16 @@ ActiveRecord::Schema.define(version: 20140909113050) do
   create_table "media", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
-    t.integer  "tag_id"
+    t.integer  "category_id",    null: false
+    t.integer  "tag_id",         null: false
     t.string   "media_id"
     t.text     "attribution"
     t.text     "tags"
-    t.string   "type"
+    t.string   "media_type"
     t.text     "location"
     t.text     "comments"
     t.string   "filter"
-    t.string   "created_time"
+    t.integer  "created_time"
     t.string   "link"
     t.text     "likes"
     t.text     "images"
@@ -42,12 +42,20 @@ ActiveRecord::Schema.define(version: 20140909113050) do
     t.text     "user"
   end
 
+  add_index "media", ["category_id"], name: "index_media_on_category_id", using: :btree
+  add_index "media", ["created_at"], name: "index_media_on_created_at", using: :btree
+  add_index "media", ["created_time"], name: "index_media_on_created_time", using: :btree
+  add_index "media", ["media_id"], name: "index_media_on_media_id", using: :btree
+  add_index "media", ["tag_id"], name: "index_media_on_tag_id", using: :btree
+
   create_table "tags", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
+    t.integer  "category_id",           null: false
     t.string   "name"
     t.integer  "media_count", limit: 8
   end
+
+  add_index "tags", ["category_id"], name: "index_tags_on_category_id", using: :btree
 
 end

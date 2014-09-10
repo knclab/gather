@@ -38,29 +38,39 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 group :test, :development do
-  gem "pry-rails"
-  gem "pry-doc"
-  gem "pry-stack_explorer"
-  gem "pry-byebug"
-  gem "hirb"
-  gem "hirb-unicode"
-  gem "tapp"
-  gem "awesome_print"
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+  gem 'hirb'
+  gem 'hirb-unicode'
+  gem 'tapp'
+  gem 'awesome_print'
 
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "quiet_assets"
-  gem "annotate", github: "ctran/annotate_models"
-  gem "timecop"
-  gem "colorize_unpermitted_parameters"
-  gem "rack-mini-profiler"
-  gem "xray-rails"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'annotate', github: 'ctran/annotate_models'
+  gem 'timecop'
+  gem 'colorize_unpermitted_parameters'
+  gem 'rack-mini-profiler'
+  gem 'xray-rails'
 
-  gem "rspec-rails"
-  gem "guard-rspec", require: false
-  gem "spring-commands-rspec"
-  gem "factory_girl_rails"
-  gem "database_rewinder"
-  gem "faker"
+  gem 'rspec-rails'
+  gem 'guard-rspec', require: false
+  gem 'spring-commands-rspec'
+  gem 'factory_girl_rails'
+  gem 'database_rewinder'
+  gem 'faker'
 end
 
+gem 'instagram'
+
+# 定数管理
+gem 'settingslogic'
+
+# DB bulk insert
+gem 'activerecord-import', "~> 0.4.1"
+
+# DB hash 形式保存読み込み
+gem 'hashie'
