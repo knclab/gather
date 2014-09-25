@@ -1,0 +1,25 @@
+<%= form_for(shallow_args(@category, @tag, :admin)) do |f| %>
+  <% if @tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+      <ul>
+      <% @tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :category_id %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :name, class: "form-control", placeholder: "ハッシュタグ" %>
+    </div>
+  </div>
+
+  <div class="box-footer">
+    <%= f.submit class: "btn btn-primary btn-block" %>
+  </div><!-- /.box-footer -->
+<% end %>

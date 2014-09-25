@@ -1,5 +1,6 @@
 defaults: &defaults
   instagram:
+    site_uri: 'http://instagram.com/'
     client_id: '01997c28f1ca43d382768d6b480781e5'
     client_secret: '90b327c921ca464c995a3e7e9130b0a0'
     redirect_uri: 'http://instagather.me/oauth/callback'

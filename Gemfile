@@ -1,3 +1,4 @@
+ruby '2.1.2'
 source 'https://rubygems.org'
 
 
@@ -6,13 +7,13 @@ gem 'rails', '4.1.5'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+#gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+#gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -74,3 +75,10 @@ gem 'activerecord-import', "~> 0.4.1"
 
 # DB hash 形式保存読み込み
 gem 'hashie'
+
+# Bootstrap
+gem 'twitter-bootswatch-rails', '~> 3.1.1'
+gem 'twitter-bootswatch-rails-helpers'
+
+# newrelic
+gem 'newrelic_rpm'

@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="page-header" id="banner">
+    <div class="row">
+      <div class="col-lg-8 col-md-7 col-sm-6">
+        <h1><%= @category.name %>に関するInstagram(インスタグラム)まとめ</h1>
+
+        <ol class="breadcrumb">
+          <li><a href="<%= root_url %>">Home</a></li>
+          <li class="active"><%= @category.name %></li>
+        </ol>
+
+        <div class="panel panel-primary">
+        <% @category.tags.each do |tag| %>
+          <span class="label label-info"><%= "\##{tag.name}" %></span>
+        <% end %>
+        </div>
+
+        <%= render :partial => "/top/social_button.html.erb" %>
+      </div>
+      <%= render :partial => "/top/sponsor" %>
+    </div>
+  </div>
+
+  <div class="row">
+  <% @category.medias.each do |media| %>
+    <a href="<%= show_url(tag_id: media.tag_id, media_id: media.media_id) %>">
+      <div class="col-xs-6 col-md-2">
+        <div class="thumbnail">
+          <img src="<%= media[:images][:thumbnail][:url] %>" class="" alt="Responsive image">
+        </div>
+      </div>
+    </a>
+  <% end %>
+  </div>
+</div> <!-- /container -->
+

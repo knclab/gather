@@ -1,0 +1,81 @@
+<% content_for :title do show_title end %>
+<% content_for :description do show_description end %>
+<% content_for :image do @media[:images][:thumbnail][:url] end %>
+<div class="container">
+
+  <div class="page-header" id="banner">
+    <div class="row">
+      <div class="col-lg-8 col-md-7 col-sm-6">
+        <h1><%= @tag.category.name %></h1>
+
+        <ol class="breadcrumb">
+          <li><a href="<%= root_url %>">Home</a></li>
+          <li><a href="<%= list_url(@tag.category.id) %>"><%= @tag.category.name %></a></li>
+          <li class="active"><%= @media.media_id %></li>
+        </ol>
+
+        <%= render :partial => "/top/social_button.html.erb" %>
+      </div>
+      <%= render :partial => "/top/sponsor" %>
+    </div>
+  </div> <!-- /page-header -->
+
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="thumbnail clearfix">
+        <%= link_to(image_tag(@media[:images][:standard_resolution][:url], class: "pull-left"), @media[:link], target: "_blank") %>
+        <div class="row">
+          <div class="col-lg-5">
+            <p>
+              <%= image_tag(@media[:caption][:from][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
+              <b><%= link_to(@media[:caption][:from][:username], "#{Constants.instagram.site_uri}#{@media[:caption][:from][:username]}", target: "_blank" ) %></b>
+            </p>
+
+            <div class="well well-sm"><pre><%= @media[:caption][:text] %></pre></div>
+
+            <div style="margin-bottom:20px;">
+              <div><span class="glyphicon glyphicon-thumbs-up"></span> <%= "#{@media[:likes][:count]}件" %></div>
+              <% if @media[:likes][:count].nonzero? %>
+                <p>
+                <% @media[:likes][:data][0..3].each do |user| %>
+                  <a href="<%= "#{Constants.instagram.site_uri}#{user[:username]}" %>" target="_blank"><span class="label label-default"><%= "#{user[:username]}" %></span></a>
+                <% end %>
+                <% if @media[:likes][:count] > 4 %>...<% end %>
+                </p>
+              <% end %>
+            </div>
+
+            <div style="margin-bottom:20px;">
+              <div><span class="glyphicon glyphicon-comment"></span> <%= "#{@media[:comments][:count]}件" %></div>
+              <% if @media[:comments][:count].nonzero? %>
+                <% @media[:comments][:data][0..5].each do |user| %>
+                  <p>
+                    <%= image_tag(user[:from][:profile_picture], style: "width:25px;height:25px;") %>
+                    <%= link_to(user[:from][:username], "#{Constants.instagram.site_uri}#{user[:from][:username]}", target: "_blank") %>
+                    <%= user[:text] %>
+                  </p>
+                <% end %>
+              <% end %>
+            </div>
+
+          </div> <!-- /col-lg-4 -->
+        </div> <!-- /row -->
+
+      </div> <!-- /thumbnail -->
+
+    </div> <!-- /col-lg-12 -->
+
+    <% @tag.category.medias.sample(6).each do |media| %>
+      <a href="<%= show_url(tag_id: media.tag_id, media_id: media.media_id) %>">
+        <div class="col-xs-6 col-md-2">
+          <div class="thumbnail">
+            <img src="<%= media[:images][:thumbnail][:url] %>" class="" alt="Responsive image">
+          </div>
+        </div>
+      </a>
+    <% end %>
+
+  </div> <!-- /row -->
+</div> <!-- /container -->
+

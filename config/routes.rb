@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  root 'top#index'
+
+  get 'list/:id' => 'top#list', as: 'list'
+  get 'show/:tag_id/:media_id' => 'top#show', as: 'show'
+
+  namespace :admin do
+    root to: "categories#index"
+    resources :categories, shallow: true do
+      resources :tags
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

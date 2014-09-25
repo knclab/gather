@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140909113050) do
     t.string   "name"
   end
 
-  create_table "media", force: true do |t|
+  create_table "medias", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id",    null: false
@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20140909113050) do
     t.text     "user"
   end
 
-  add_index "media", ["category_id"], name: "index_media_on_category_id", using: :btree
-  add_index "media", ["created_at"], name: "index_media_on_created_at", using: :btree
-  add_index "media", ["created_time"], name: "index_media_on_created_time", using: :btree
-  add_index "media", ["media_id"], name: "index_media_on_media_id", using: :btree
-  add_index "media", ["tag_id"], name: "index_media_on_tag_id", using: :btree
+  add_index "medias", ["category_id"], name: "index_medias_on_category_id", using: :btree
+  add_index "medias", ["created_at"], name: "index_medias_on_created_at", using: :btree
+  add_index "medias", ["created_time"], name: "index_medias_on_created_time", using: :btree
+  add_index "medias", ["media_id"], name: "index_medias_on_media_id", using: :btree
+  add_index "medias", ["tag_id"], name: "index_medias_on_tag_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.datetime "created_at"
