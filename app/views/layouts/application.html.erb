@@ -13,8 +13,8 @@
 
     <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : t('views.header.title') %>"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="<%= content_for?(:image) ? yield(:image) : t('views.header.title') %>"/>
-    <meta property="og:url" content="<%= request.url %>"/>
+    <meta property="og:image" content="<%= @results.first[:images][:low_resolution][:url] %>"/>
+    <meta property="og:url" content="<%= request.url.gsub(/\?.+$/,'') %>"/>
     <meta property="og:site_name" content="<%= t('views.header.title') %>"/>
     <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : t('views.header.description') %>" />
 

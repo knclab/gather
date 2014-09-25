@@ -3,15 +3,13 @@
   <div class="page-header" id="banner">
     <div class="row">
       <div class="col-lg-8 col-md-7 col-sm-6">
-        <h1><%= 'おしゃれなコーディネート画像まとめ' %></h1>
+        <h1><%= t('views.header.title') %></h1>
         <%= render :partial => "/top/social_button.html.erb" %>
         <div class="well">
-          <h4>Instagramとは？</h4>
-          <p><a href="http://instagram.com/">写真を撮影して共有できるスマートフォン用アプリ</a>です。</p>
           <p><%= t('views.header.description') %></p>
         </div>
       </div>
-      <%= render :partial => "/top/sponsor" %>
+      <%#= render :partial => "/top/sponsor" %>
     </div>
   </div>
 
