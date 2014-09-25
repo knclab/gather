@@ -2,7 +2,7 @@ ja:
   views:
     header:
       title: 'Coordinate Selection'
-      description: 'インスタグラムにアップされた"おしゃれさん"たちの画像を随時紹介！いますぐウォッチしよう！！'
+      description: 'インスタグラムにアップされた"おしゃれさん"たちの画像を随時紹介！気になるコーデをいますぐウォッチ！！'
       keywords: 'ファッション,コーディネート,Instagram,インスタグラム,写真,アルバム,スタグラム,まとめ,あつめ,タグ,ハッシュタグ'
 
     service_name: 'Instagather'
