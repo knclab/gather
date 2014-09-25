@@ -1,8 +1,8 @@
 ja:
   views:
     header:
-      title: 'おしゃれなコーディネート画像まとめ'
-      description: 'おしゃれさんの間で流行中「instagram」。選りすぐりのおしゃれ画像を随時紹介。おしゃれな画像を眺めてファッションセンスをアップしちゃお'
+      title: 'Coordinate Selection'
+      description: 'インスタグラムにアップされた"おしゃれさん"たちの画像を随時紹介！いますぐウォッチしよう！！'
       keywords: 'ファッション,コーディネート,Instagram,インスタグラム,写真,アルバム,スタグラム,まとめ,あつめ,タグ,ハッシュタグ'
 
     service_name: 'Instagather'

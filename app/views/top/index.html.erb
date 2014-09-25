@@ -1,14 +1,10 @@
 <div class="container">
 
   <div class="page-header" id="banner">
-    <div class="row">
-      <div class="col-lg-8 col-md-7 col-sm-6">
-        <h1><%= t('views.header.title') %></h1>
-        <%= render :partial => "/top/social_button.html.erb" %>
-        <div class="well">
-          <p><%= t('views.header.description') %></p>
-        </div>
-      </div>
+    <div class="text-center">
+      <h1><%= link_to(t('views.header.title'), root_url, style: 'color:#000000;') %></h1>
+      <p><%= t('views.header.description') %></p>
+      <%= render :partial => "/top/social_button.html.erb" %>
       <%#= render :partial => "/top/sponsor" %>
     </div>
   </div>
