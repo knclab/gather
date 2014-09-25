@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require readable/loader
 //= require readable/bootswatch
+//= require infinite-scroll/jquery.infinitescroll
 

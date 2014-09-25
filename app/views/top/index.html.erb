@@ -3,7 +3,7 @@
   <div class="page-header" id="banner">
     <div class="row">
       <div class="col-lg-8 col-md-7 col-sm-6">
-        <h1><%= t('views.category') %></h1>
+        <h1><%= 'おしゃれなコーディネート画像まとめ' %></h1>
         <%= render :partial => "/top/social_button.html.erb" %>
         <div class="well">
           <h4>Instagramとは？</h4>
@@ -16,18 +16,20 @@
   </div>
 
   <div class="row">
-  <% @categories.each do |category| %>
-      <a href="<%= list_url(category.id) %>">
+  <% @results.each do |media| %>
+      <a href="<%= media[:link] %>" target='_blnak'>
       <div class="col-lg-4 col-sm-6 col-xs-12">
         <div class="thumbnail">
-          <img src="<%= category.medias.first[:images][:low_resolution][:url] %>" class="" alt="Responsive image">
-          <div class="caption">
-            <h5><%= category.name %></h5>
-          </div>
+          <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="Responsive image">
         </div>
       </div>
     </a>
   <% end %>
   </div>
-</div> <!-- /container -->
 
+  <div class="btn-group btn-group-justified">
+    <div class="btn-group">
+        <a class="btn btn-default" href="<%= root_url(max_id: @next_max_id)%>" role="button">もっとみる</a>
+    </div>
+  </div>
+</div> <!-- /container -->

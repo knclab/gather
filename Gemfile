@@ -83,6 +83,9 @@ gem 'twitter-bootswatch-rails-helpers'
 # newrelic
 gem 'newrelic_rpm'
 
+# ページネーション
+gem 'kaminari'
+
 group :production do
   gem 'rails_12factor'
 end
