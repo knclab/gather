@@ -82,3 +82,7 @@ gem 'twitter-bootswatch-rails-helpers'
 
 # newrelic
 gem 'newrelic_rpm'
+
+group :production do
+  gem 'rails_12factor'
+end
