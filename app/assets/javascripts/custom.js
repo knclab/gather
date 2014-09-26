@@ -14,7 +14,7 @@ $(function(){
     });
   });
 
-  $(window).bottom({proximity: 0.05});
+  $(window).bottom({proximity: 0.1});
   $(window).on('bottom', function() {
     // コンテンツ表示の処理を記述
     var obj = $(this);
