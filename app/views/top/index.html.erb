@@ -11,13 +11,30 @@
 
   <div class="row">
   <% @results.each do |media| %>
-      <a href="<%= media[:link] %>" target='_blnak'>
       <div class="col-lg-4 col-sm-6 col-xs-12">
         <div class="thumbnail">
-          <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="Responsive image">
+          <a href="<%= media[:link] %>" target='_blnak'>
+            <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="">
+          </a>
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-1 col-sm-2 col-xs-2">
+                <%= image_tag(media[:user][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-2 col-md-offset-1">
+                <%= link_to(media[:user][:username], "#{Constants.instagram.site_uri}#{media[:user][:username]}", style: 'color:#000000;', target: "_blank" ) %>
+              </div>
+              <div class="col-md-10 col-xs-10 col-md-offset-1 text-right">
+                <span class="glyphicon glyphicon-thumbs-up"></span> <%= number_with_delimiter(media[:likes][:count]) %>
+                <span class="glyphicon glyphicon-comment"></span> <%= number_with_delimiter(media[:comments][:count]) %>
+              </div>
+            </div>
+            <div style="word-break:break-all">
+              <%= media[:caption][:text] %>
+            </div>
+          </div>
         </div>
       </div>
-    </a>
   <% end %>
   </div>
 
