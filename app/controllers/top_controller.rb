@@ -6,11 +6,26 @@ class TopController < ApplicationController
     options[:max_id] = params[:max_id].to_i if params[:max_id]
     options[:min_id] = params[:min_id].to_i if params[:min_id]
     res = conn.tag_recent_media(CGI.escape(Constants.instagram.tag_name), options)
+#p res.pagination
 
     @results = res
-    #@results = Kaminari.paginate_array(res, total_count: tag_count[:media_count])
+    #@results = Kaminari.paginate_array(res, total_count: tag_count[:media_count]).page(1).per(20)
     @next_max_id = res.pagination.next_max_id
     @next_min_id = res.pagination.next_min_id
+  end
+
+  def search
+    conn = Instagram.client(:access_token => Constants.instagram.access_token)
+    options = {}
+    options[:max_id] = params[:id].to_i if params[:id]
+    res = conn.tag_recent_media(CGI.escape(Constants.instagram.tag_name), options)
+#p res.pagination
+    @results = res
+    @next_max_id = res.pagination.next_max_id
+#    respond_to do |format|
+#      format.html { redirect_to root_url }
+#      format.json { render json: {pagination: res.pagination, results: res} }
+#    end
   end
 
   def list

@@ -14,25 +14,53 @@ $(function(){
     });
   });
 
-  $container.infinitescroll({
-    navSelector  : 'ul.pagination',    // ナビゲーション
-    nextSelector : 'ul.pagination a:last',  // 次ページへのリンク
-    itemSelector : '.box',     // 次ページ内で探す要素
-    loading: {
-        finishedMsg: '',
-        img: '/assets/ajax-loader.gif'//ローディング画像
-      }
-    },
-    // コールバック
-    function( newElements ) {
-      $('#paginate').remove();
-      var $newElems = $( newElements );
-      // ボックスを配列させる前に画像をロードしとく
-      $newElems.imagesLoaded(function(){
-        $container.masonry( 'appended', $newElems, true );
-      });
+  $(window).bottom({proximity: 0.05});
+  $(window).on('bottom', function() {
+    // コンテンツ表示の処理を記述
+    var obj = $(this);
+    if (!obj.data('loading')) {
+        obj.data('loading', true);
+        var url = $('#page-nav a').attr('href');
+        $.ajax({
+            url: url,
+            cache: false,
+            success: function(html){
+                $('#page-nav').remove();
+                var $newElems = $(html).find('.box');
+                $container.append($newElems);
+//console.log($newElems);
+//console.log($container.masonry);
+                $newElems.imagesLoaded(function(){
+//console.log('test');
+                  $container.masonry( 'appended', $newElems, true );
+                });
+                obj.data('loading', false);
+            }
+        });
     }
-  );
+  });
+
+
+//  $container.infinitescroll({
+//    navSelector  : 'ul.pagination',    // ナビゲーション
+//    nextSelector : 'ul.pagination a:last',  // 次ページへのリンク
+//    itemSelector : '.box',     // 次ページ内で探す要素
+//    loading: {
+//        finishedMsg: '',
+//        img: '/assets/ajax-loader.gif'//ローディング画像
+//      }
+//    },
+//    // コールバック
+//    function( newElements ) {
+//      $('#paginate').remove();
+//      var $newElems = $( newElements );
+//console.debug($newElems);
+//      // ボックスを配列させる前に画像をロードしとく
+//      $newElems.imagesLoaded(function(){
+//        $container.masonry( 'appended', $newElems, true );
+//      });
+//    }
+//  );
 
 
 //  $container.infinitescroll({
