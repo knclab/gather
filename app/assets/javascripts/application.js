@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require readable/loader
 //= require readable/bootswatch
+//= require imagesloaded.pkgd
+//= require masonry.pkgd
+//= require infinite-scroll/jquery.infinitescroll
+//= require custom
 
