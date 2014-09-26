@@ -16,6 +16,6 @@
 //= require readable/bootswatch
 //= require imagesloaded.pkgd
 //= require masonry.pkgd
-//= require infinite-scroll/jquery.infinitescroll
+//= require jquery.infinitescroll
 //= require custom
 
