@@ -12,9 +12,9 @@ xml.rss("version"    => '2.0',
     @results.each do |media|
       xml.item do
         xml.title t('views.header.title')
-        xml.guid media[:images][:low_resolution][:url]
+        xml.guid request.url.gsub(request.path, '')
         xml.link request.url.gsub(request.path, '')
-        xml.description media[:caption].try(:text)
+        xml.description t('views.header.description')
         xml.pubDate Time.at(media[:created_time].to_i).strftime("%a, %d %b %Y %H:%M:%S %Z")
         xml.author media[:user][:username]
       end
