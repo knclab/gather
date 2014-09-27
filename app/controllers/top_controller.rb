@@ -28,6 +28,15 @@ class TopController < ApplicationController
 #    end
   end
 
+  def feed
+    conn = Instagram.client(:access_token => Constants.instagram.access_token)
+    @results = conn.tag_recent_media(CGI.escape(Constants.instagram.tag_name))
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.rss { render layout: false }
+    end
+  end
+
   def list
     @category = Category.includes(:medias).find(params[:id])
   end

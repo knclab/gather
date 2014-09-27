@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'top#index'
 
   get 'search/:id' => 'top#search', as: 'search'
+  get 'feed' => 'top#feed', as: 'feed'
 
   get 'list/:id' => 'top#list', as: 'list'
   get 'show/:tag_id/:media_id' => 'top#show', as: 'show'
