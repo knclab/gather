@@ -56,14 +56,14 @@ class TopController < ApplicationController
 
 
 #binding.pry
-    @tag = Tag.includes(:category).find(params[:tag_id])
+    #@tag = Tag.includes(:category).find(params[:tag_id])
     @media = Media.find_by(media_id: params[:media_id])
 
     if @media.blank?
       begin
         conn = Instagram.client(:access_token => Constants.instagram.access_token)
         res = conn.media_item(params[:media_id])
-        @media = set_media(res)
+        @media = res
       rescue Exception => e
         @media = nil
       end

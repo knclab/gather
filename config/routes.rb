@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'feed' => 'top#feed', as: 'feed'
 
   get 'list/:id' => 'top#list', as: 'list'
-  get 'show/:tag_id/:media_id' => 'top#show', as: 'show'
+  get 'show/:media_id' => 'top#show', as: 'show'
 
   namespace :admin do
     root to: "categories#index"

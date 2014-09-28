@@ -5,15 +5,15 @@ module ApplicationHelper
   end
 
   def show_title
-    return "#{t('views.header.title')} - #{@media[:media_id]}の画像"
+    return "#{t('views.header.title')} - #{@media[:user][:username]}の画像 #{@media[:id]}"
   end
 
   def show_description
     text = []
-    text << "カテゴリー：#{@tag.category.name}"
-    text << "タグ：#{@tag.name}"
+    text << "カテゴリー：ファッション/コーディネート"
+    #text << "タグ：#{@tag.name}"
     text << "投稿者：#{@media[:user][:username]}"
-    text << "メディア：#{@media[:media_id]}"
+    text << "メディア：#{@media[:id]}"
     text << "いいね数：#{@media[:likes][:count]}"
     text << "コメント数：#{@media[:comments][:count]}"
     return text.join('、')
