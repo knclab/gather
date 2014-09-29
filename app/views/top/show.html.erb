@@ -3,15 +3,7 @@
 <% content_for :image do @media[:images][:thumbnail][:url] end %>
 <div class="container">
 
-  <div class="page-header" id="banner">
-    <div class="text-center">
-      <h1><%= link_to(t('views.header.title'), root_url, style: 'color:#000000;') %></h1>
-      <p><%= t('views.header.description') %></p>
-      <%= render :partial => "/top/social_button" %>
-      <%#= render :partial => "/top/sponsor" %>
-    </div>
-  </div>
-
+  <%= render :partial => "/top/page_header" %>
 
 <% if false %>
   <div class="page-header" id="banner">
@@ -51,7 +43,7 @@
               <% if @media[:likes][:count].nonzero? %>
                 <p>
                 <% @media[:likes][:data][0..3].each do |user| %>
-                  <a href="<%= "#{Constants.instagram.site_uri}#{user[:username]}" %>" target="_blank"><span class="label label-default"><%= "#{user[:username]}" %></span></a>
+                  <a href="<%= user_url(user[:id]) %>" target="_blank"><span class="label label-default"><%= "#{user[:username]}" %></span></a>
                 <% end %>
                 <% if @media[:likes][:count] > 4 %>...<% end %>
                 </p>
@@ -64,7 +56,7 @@
                 <% @media[:comments][:data][0..5].each do |user| %>
                   <p>
                     <%= image_tag(user[:from][:profile_picture], style: "width:25px;height:25px;") %>
-                    <%= link_to(user[:from][:username], "#{Constants.instagram.site_uri}#{user[:from][:username]}", target: "_blank") %>
+                    <%= link_to(user[:from][:username], user_url(user[:from][:id]), target: "_blank") %>
                     <%= user[:text] %>
                   </p>
                 <% end %>

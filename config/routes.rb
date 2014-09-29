@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'top#index'
 
+  get 'user/:id' => 'top#user', as: 'user'
+  get 'search_user_feed/:id' => 'top#search_user_feed', as: 'search_user_feed'
+
   get 'search/:id' => 'top#search', as: 'search'
   get 'feed' => 'top#feed', as: 'feed'
 

@@ -28,6 +28,23 @@ class TopController < ApplicationController
 #    end
   end
 
+  def search_user_feed
+    conn = Instagram.client(:access_token => Constants.instagram.access_token)
+    options = {}
+    options[:max_id] = params[:max_id].to_i if params[:max_id]
+    res = conn.user_recent_media(params[:id], options)
+#binding.pry
+#p res.pagination
+    @results = res
+    @next_max_id = res.pagination.next_max_id
+    @user = res.first[:user]
+    render action: :search
+#    respond_to do |format|
+#      format.html { redirect_to root_url }
+#      format.json { render json: {pagination: res.pagination, results: res} }
+#    end
+  end
+
   def feed
     conn = Instagram.client(:access_token => Constants.instagram.access_token)
     @results = conn.tag_recent_media(CGI.escape(Constants.instagram.tag_name))
@@ -37,36 +54,46 @@ class TopController < ApplicationController
     end
   end
 
+  def user
+    conn = Instagram.client(:access_token => Constants.instagram.access_token)
+    @user = conn.user(params[:id])
+    @results = conn.user_recent_media(params[:id])
+    @next_max_id = @results.pagination.next_max_id
+  end
+
   def list
     @category = Category.includes(:medias).find(params[:id])
   end
 
   def show
-    def set_media(res)
-#binding.pry
-      return nil if res.blank?
-      return Media.new( category_id: @tag.category_id, tag_id: @tag.id, media_id: res[:id],
-                        attribution: res[:attribution], tags: res[:tags], media_type: res[:type],
-                        location: res[:location], comments: res[:comments], filter: res[:filter],
-                        created_time: res[:created_time], link: res[:link], likes: res[:likes],
-                        images: res[:images], videos: res[:videos], users_in_photo: res[:users_in_photo],
-                        caption: res[:caption], user_has_liked: res[:user_has_liked], user: res[:user],
-                      )
-    end
-
-
-#binding.pry
-    #@tag = Tag.includes(:category).find(params[:tag_id])
-    @media = Media.find_by(media_id: params[:media_id])
-
-    if @media.blank?
-      begin
-        conn = Instagram.client(:access_token => Constants.instagram.access_token)
-        res = conn.media_item(params[:media_id])
-        @media = res
-      rescue Exception => e
-        @media = nil
-      end
-    end
+    conn = Instagram.client(:access_token => Constants.instagram.access_token)
+    res = conn.media_item(params[:media_id])
+    @media = res
+#    def set_media(res)
+##binding.pry
+#      return nil if res.blank?
+#      return Media.new( category_id: @tag.category_id, tag_id: @tag.id, media_id: res[:id],
+#                        attribution: res[:attribution], tags: res[:tags], media_type: res[:type],
+#                        location: res[:location], comments: res[:comments], filter: res[:filter],
+#                        created_time: res[:created_time], link: res[:link], likes: res[:likes],
+#                        images: res[:images], videos: res[:videos], users_in_photo: res[:users_in_photo],
+#                        caption: res[:caption], user_has_liked: res[:user_has_liked], user: res[:user],
+#                      )
+#    end
+#
+#
+##binding.pry
+#    #@tag = Tag.includes(:category).find(params[:tag_id])
+#    @media = Media.find_by(media_id: params[:media_id])
+#
+#    if @media.blank?
+#      begin
+#        conn = Instagram.client(:access_token => Constants.instagram.access_token)
+#        res = conn.media_item(params[:media_id])
+#        @media = res
+#      rescue Exception => e
+#        @media = nil
+#      end
+#    end
   end
 end

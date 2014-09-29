@@ -1,0 +1,10 @@
+<% content_for :title do show_title end %>
+<% content_for :description do show_description end %>
+<% content_for :image do @user[:profile_picture] end %>
+<div class="container">
+
+  <%= render :partial => "/top/page_header" %>
+
+  <%= render :partial => "/top/contents" %>
+
+</div> <!-- /container -->

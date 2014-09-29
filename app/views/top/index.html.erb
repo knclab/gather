@@ -1,28 +1,7 @@
 <div class="container">
 
-  <div class="page-header" id="banner">
-    <div class="text-center">
-      <h1><%= link_to(t('views.header.title'), root_url, style: 'color:#000000;') %></h1>
-      <p><%= t('views.header.description') %></p>
-      <%= render :partial => "/top/social_button" %>
-      <%#= render :partial => "/top/sponsor" %>
-    </div>
-  </div>
+  <%= render :partial => "/top/page_header" %>
 
   <%= render :partial => "/top/contents" %>
 
-<% if false %>
-    <div id="paginate" class="box" style="display:none;">
-      <%= paginate @results %>
-    </div>
-<% end %>
-
-
-<% if false %>
-  <div class="btn-group btn-group-justified">
-    <div class="btn-group">
-        <a class="btn btn-default" href="<%= root_url(max_id: @next_max_id)%>" role="button">もっとみる</a>
-    </div>
-  </div>
-<% end %>
 </div> <!-- /container -->

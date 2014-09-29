@@ -2,7 +2,7 @@
 <% @results.each do |media| %>
   <div class="box col-lg-4 col-sm-6 col-xs-12">
     <div class="thumbnail">
-      <a href="<%= media[:link] %>" target='_blnak'>
+      <a href="<%= show_url(media[:id]) %>" target='_blnak'>
         <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="">
       </a>
       <div class="caption">
@@ -11,7 +11,7 @@
             <%= image_tag(media[:user][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
           </div>
           <div class="col-md-2 col-sm-2 col-xs-2 col-md-offset-1">
-            <%= link_to(media[:user][:username], "#{Constants.instagram.site_uri}#{media[:user][:username]}", style: 'color:#000000;', target: "_blank" ) %>
+            <%= link_to(media[:user][:username], user_url(media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %>
           </div>
           <div class="col-md-10 col-xs-10 col-md-offset-1 text-right">
             <span class="glyphicon glyphicon-thumbs-up"></span> <%= number_with_delimiter(media[:likes][:count]) %>
@@ -25,5 +25,5 @@
     </div>
   </div>
 <% end %>
-  <nav id="page-nav" class="box"><a href="<%= search_url(@next_max_id) %>"></a></nav>
+  <nav id="page-nav" class="box"><a href="<%= params[:action] =~ /user/ ? search_user_feed_url(id: @user[:id], max_id: @next_max_id) : search_url(@next_max_id) %>"></a></nav>
 </div>
