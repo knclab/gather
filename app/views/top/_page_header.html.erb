@@ -2,7 +2,9 @@
   <div class="text-center">
     <h1><%= link_to(t('views.header.title'), root_url, style: 'color:#000000;') %></h1>
     <p><%= t('views.header.description') %></p>
-    <%= render :partial => "/top/social_button" %>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_sharing_toolbox"></div>
+    <%#= render :partial => "/top/social_button" %>
     <%#= render :partial => "/top/sponsor" %>
   </div>
 </div>
