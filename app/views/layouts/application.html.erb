@@ -13,7 +13,10 @@
     <link rel="shortcut icon" href="<%= asset_path("favicon.ico") %>" type="image/x-icon">
     <link rel="icon" href="<%= asset_path("favicon.ico") %>" type="image/x-icon">
 
+    <!--
     <meta name="twitter:card" content="summary_large_image">
+    -->
+    <meta name="twitter:card" content="photo" />
 
     <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : t('views.header.title') %>"/>
     <meta property="og:type" content="website"/>
