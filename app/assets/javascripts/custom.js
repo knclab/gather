@@ -83,4 +83,19 @@ $(function(){
 //  );
 
 
+  var $show_container = $('#show_user_contents');
+  $show_container.imagesLoaded(function(){
+    $show_container.masonry({
+      itemSelector: '.show_user_box'
+    });
+  });
+  var $show_container2 = $('#show_contents2');
+  $show_container2.imagesLoaded(function(){
+    $show_container2.masonry({
+      itemSelector: '.box2'
+    });
+  });
+
+
+
 });

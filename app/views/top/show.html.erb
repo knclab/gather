@@ -33,7 +33,7 @@
           <div class="col-lg-5">
             <p>
               <%= image_tag(@media[:caption][:from][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
-              <b><%= link_to(@media[:caption][:from][:username], "#{Constants.instagram.site_uri}#{@media[:caption][:from][:username]}", target: "_blank" ) %></b>
+              <b><%= link_to(@media[:caption][:from][:username], user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></b>
             </p>
 
             <div class="well well-sm" style="word-break:break-all"><%= @media[:caption][:text] %></div>
@@ -83,5 +83,47 @@
 <% end %>
 
   </div> <!-- /row -->
+
+    <div class="page-header">
+      <div>
+          <h4><%= link_to("#{@media[:user][:username]}さんの他の画像", user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></h4>
+      </div>
+    </div>
+    <div id="show_user_contents" class="row">
+    <% @user_results.each do |media| %>
+      <div class="show_user_box col-lg-4 col-sm-6 col-xs-12">
+        <div class="thumbnail">
+          <a href="<%= show_url(media[:id]) %>" target='_blnak'>
+            <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="">
+          </a>
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-1 col-sm-2 col-xs-2">
+                <%= image_tag(media[:user][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-2 col-md-offset-1">
+                <%= link_to(media[:user][:username], user_url(media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %>
+              </div>
+              <div class="col-md-10 col-xs-10 col-md-offset-1 text-right">
+                <span class="glyphicon glyphicon-thumbs-up"></span> <%= number_with_delimiter(media[:likes][:count]) %>
+                <span class="glyphicon glyphicon-comment"></span> <%= number_with_delimiter(media[:comments][:count]) %>
+              </div>
+            </div>
+            <div style="word-break:break-all">
+              <%= media[:caption].try(:text) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+    <div class="page-header">
+      <div>
+        <h4><%= link_to("おすすめ画像", root_url, style: 'color:#000000;', target: "_blank") %></h4>
+      </div>
+    </div>
+    <%= render :partial => "/top/contents" %>
+
 </div> <!-- /container -->
 

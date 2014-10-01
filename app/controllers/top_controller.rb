@@ -69,6 +69,9 @@ class TopController < ApplicationController
     conn = Instagram.client(:access_token => Constants.instagram.access_token)
     res = conn.media_item(params[:media_id])
     @media = res
+    @user_results = conn.user_recent_media(res[:user][:id], {count: 6})
+    @results = conn.tag_recent_media(CGI.escape(Constants.instagram.tag_name))
+    @next_max_id = @results.pagination.next_max_id
 #    def set_media(res)
 ##binding.pry
 #      return nil if res.blank?
