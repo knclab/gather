@@ -17,6 +17,8 @@ xml.rss("version"    => '2.0',
         xml.description media[:caption][:text]
         xml.pubDate Time.at(media[:created_time].to_i).strftime("%a, %d %b %Y %H:%M:%S %Z")
         xml.author media[:user][:username]
+        xml.enclosure media[:images][:standard_resolution][:url]
+        xml.source media[:images][:standard_resolution][:url]
       end
     end
   end
