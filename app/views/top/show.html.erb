@@ -33,17 +33,23 @@
           <div class="col-lg-5">
             <p>
               <%= image_tag(@media[:caption][:from][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
-              <b><%= link_to(@media[:caption][:from][:username], user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></b>
+              <b><%= @media[:user][:username] %></b>
+              <% if false %>
+              <b><%#= link_to(@media[:caption][:from][:username], user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></b>
+              <% end %>
             </p>
 
-            <div class="well well-sm" style="word-break:break-all"><%= @media[:caption][:text] %></div>
+            <div class="well well-sm" style="word-break:break-all"><%= @media[:caption].try(:text) %></div>
 
             <div style="margin-bottom:20px;">
               <div><span class="glyphicon glyphicon-thumbs-up"></span> <%= "#{@media[:likes][:count]}件" %></div>
               <% if @media[:likes][:count].nonzero? %>
                 <p>
                 <% @media[:likes][:data][0..3].each do |user| %>
+                  <span class="label label-default"><%= "#{user[:username]}" %></span>
+              <% if false %>
                   <a href="<%= user_url(user[:id]) %>" target="_blank"><span class="label label-default"><%= "#{user[:username]}" %></span></a>
+              <% end %>
                 <% end %>
                 <% if @media[:likes][:count] > 4 %>...<% end %>
                 </p>
@@ -54,9 +60,12 @@
               <div><span class="glyphicon glyphicon-comment"></span> <%= "#{@media[:comments][:count]}件" %></div>
               <% if @media[:comments][:count].nonzero? %>
                 <% @media[:comments][:data][0..5].each do |user| %>
-                  <p>
+                  <p style="word-break:break-all">
                     <%= image_tag(user[:from][:profile_picture], style: "width:25px;height:25px;") %>
-                    <%= link_to(user[:from][:username], user_url(user[:from][:id]), target: "_blank") %>
+                    <%= user[:from][:username] %>
+              <% if false %>
+                    <%#= link_to(user[:from][:username], user_url(user[:from][:id]), target: "_blank") %>
+              <% end %>
                     <%= user[:text] %>
                   </p>
                 <% end %>
@@ -84,6 +93,7 @@
 
   </div> <!-- /row -->
 
+<% if false %>
     <div class="page-header">
       <div>
           <h4><%= link_to("#{@media[:user][:username]}さんの他の画像", user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></h4>
@@ -117,8 +127,9 @@
       </div>
     <% end %>
     </div>
+<% end %>
 
-    <div class="page-header">
+    <div id="topics" class="page-header">
       <div>
         <h4><%= link_to("おすすめ画像", root_url, style: 'color:#000000;', target: "_blank") %></h4>
       </div>

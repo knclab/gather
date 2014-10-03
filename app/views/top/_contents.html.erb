@@ -3,7 +3,7 @@
   <div class="box col-lg-4 col-sm-6 col-xs-12">
     <div class="thumbnail">
       <a href="<%= show_url(media[:id]) %>" target='_blnak'>
-        <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="">
+          <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="<%= media[:caption].try(:text) %>">
       </a>
       <div class="caption">
         <div class="row">
@@ -11,7 +11,8 @@
             <%= image_tag(media[:user][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
           </div>
           <div class="col-md-2 col-sm-2 col-xs-2 col-md-offset-1">
-            <%= link_to(media[:user][:username], user_url(media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %>
+            <%= media[:user][:username] %>
+            <%#= link_to(media[:user][:username], user_url(media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %>
           </div>
           <div class="col-md-10 col-xs-10 col-md-offset-1 text-right">
             <span class="glyphicon glyphicon-thumbs-up"></span> <%= number_with_delimiter(media[:likes][:count]) %>
@@ -25,5 +26,7 @@
     </div>
   </div>
 <% end %>
+<% unless params[:action] == 'show' %>
   <nav id="page-nav" class="box"><a href="<%= params[:action] =~ /user/ ? search_user_feed_url(id: @user[:id], max_id: @next_max_id) : search_url(@next_max_id) %>"></a></nav>
+<% end %>
 </div>

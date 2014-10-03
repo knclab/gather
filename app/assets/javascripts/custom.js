@@ -16,27 +16,29 @@ $(function(){
 
   $(window).bottom({proximity: 0.1});
   $(window).on('bottom', function() {
-    // コンテンツ表示の処理を記述
-    var obj = $(this);
-    if (!obj.data('loading')) {
-        obj.data('loading', true);
-        var url = $('#page-nav a').attr('href');
-        $.ajax({
-            url: url,
-            cache: false,
-            success: function(html){
-                $('#page-nav').remove();
-                var $newElems = $(html).find('.box');
-                $container.append($newElems);
+    if ($('#topics')[0] == undefined ) {
+      // コンテンツ表示の処理を記述
+      var obj = $(this);
+      if (!obj.data('loading')) {
+          obj.data('loading', true);
+          var url = $('#page-nav a').attr('href');
+          $.ajax({
+              url: url,
+              cache: false,
+              success: function(html){
+                  $('#page-nav').remove();
+                  var $newElems = $(html).find('.box');
+                  $container.append($newElems);
 //console.log($newElems);
 //console.log($container.masonry);
-                $newElems.imagesLoaded(function(){
+                  $newElems.imagesLoaded(function(){
 //console.log('test');
-                  $container.masonry( 'appended', $newElems, true );
-                });
-                obj.data('loading', false);
-            }
+                    $container.masonry( 'appended', $newElems, true );
+                  });
+                  obj.data('loading', false);
+              }
         });
+      }
     }
   });
 
