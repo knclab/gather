@@ -11,10 +11,10 @@ xml.rss("version"    => '2.0',
 
     @results.each do |media|
       xml.item do
-        xml.title "@#{media[:user][:username]}"
+        xml.title t('views.header.title')
         xml.guid show_url(media[:id])
         xml.link show_url(media[:id])
-        xml.description media[:caption].try(:text)
+        xml.description "#{media[:caption].try(:text)} #CoordinateSelection @#{media[:user][:username]}"
         xml.pubDate Time.at(media[:created_time].to_i).strftime("%a, %d %b %Y %H:%M:%S %Z")
         xml.author media[:user][:username]
         xml.enclosure media[:images][:standard_resolution][:url]
