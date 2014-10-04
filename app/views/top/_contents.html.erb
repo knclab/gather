@@ -1,5 +1,5 @@
 <div id="contents" class="row">
-<% if request.smart_phone? %>
+<% if request.smart_phone? && params[:action] == 'index' %>
   <div class="box" style="margin-left:4px;">
     <div class="thumbnail">
       <!-- i-mobile for SmartPhone client script -->
@@ -42,7 +42,7 @@
   </div>
 <% end %>
 
-<% if request.smart_phone? %>
+<% if request.smart_phone? && params[:action] == 'index' %>
   <div class="box" style="margin-left:4px;">
     <div class="thumbnail">
       <!-- i-mobile for SmartPhone client script -->
