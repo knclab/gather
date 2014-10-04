@@ -1,4 +1,5 @@
 <div id="contents" class="row">
+<% if request.smart_phone? %>
   <div class="box" style="margin-left:4px;">
     <div class="thumbnail">
       <!-- i-mobile for SmartPhone client script -->
@@ -11,6 +12,7 @@
       <script type="text/javascript" src="http://spad.i-mobile.co.jp/script/adssp.js?20110215"></script>
     </div>
   </div>
+<% end %>
 
 <% @results.each do |media| %>
   <div class="box col-lg-4 col-sm-6 col-xs-12">
@@ -40,6 +42,7 @@
   </div>
 <% end %>
 
+<% if request.smart_phone? %>
   <div class="box" style="margin-left:4px;">
     <div class="thumbnail">
       <!-- i-mobile for SmartPhone client script -->
@@ -52,6 +55,8 @@
       <script type="text/javascript" src="http://spad.i-mobile.co.jp/script/adssp.js?20110215"></script>
     </div>
   </div>
+<% end %>
+
 <% unless params[:action] == 'show' %>
   <nav id="page-nav" class="box"><a href="<%= params[:action] =~ /user/ ? search_user_feed_url(id: @user[:id], max_id: @next_max_id) : search_url(@next_max_id) %>"></a></nav>
 <% end %>

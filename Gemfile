@@ -66,6 +66,7 @@ group :test, :development do
 end
 
 gem 'instagram'
+gem 'fb_graph'
 
 # 定数管理
 gem 'settingslogic'
@@ -85,6 +86,9 @@ gem 'newrelic_rpm'
 
 # ページネーション
 gem 'kaminari'
+
+# mobile
+gem 'jpmobile'
 
 group :production do
   gem 'rails_12factor'
