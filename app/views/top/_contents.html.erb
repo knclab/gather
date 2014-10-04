@@ -1,6 +1,8 @@
 <div id="contents" class="row">
+<% @results.each_with_index do |media, idx| %>
 <% if request.smart_phone? && params[:action] == 'index' %>
-  <div class="box" style="margin-left:4px;">
+  <% if idx+1 == 6 %>
+  <div class="box" style="margin:4px;">
     <div class="thumbnail">
       <!-- i-mobile for SmartPhone client script -->
       <script type="text/javascript">
@@ -12,9 +14,21 @@
       <script type="text/javascript" src="http://spad.i-mobile.co.jp/script/adssp.js?20110215"></script>
     </div>
   </div>
+  <% elsif idx+1 == 13 %>
+  <div class="box" style="margin:4px;">
+    <div class="thumbnail">
+      <!-- i-mobile for SmartPhone client script -->
+      <script type="text/javascript">
+          imobile_tag_ver = "0.2";
+          imobile_pid = "6232";
+          imobile_asid = "298698";
+          imobile_type = "inline";
+      </script>
+      <script type="text/javascript" src="http://spad.i-mobile.co.jp/script/adssp.js?20110215"></script>
+    </div>
+  </div>
+  <% end %>
 <% end %>
-
-<% @results.each do |media| %>
   <div class="box col-lg-4 col-sm-6 col-xs-12">
     <div class="thumbnail">
       <a href="<%= show_url(media[:id]) %>" target='_blnak'>
@@ -38,21 +52,6 @@
           <%= media[:caption].try(:text) %>
         </div>
       </div>
-    </div>
-  </div>
-<% end %>
-
-<% if request.smart_phone? && params[:action] == 'index' %>
-  <div class="box" style="margin-left:4px;">
-    <div class="thumbnail">
-      <!-- i-mobile for SmartPhone client script -->
-      <script type="text/javascript">
-          imobile_tag_ver = "0.2";
-          imobile_pid = "6232";
-          imobile_asid = "298698";
-          imobile_type = "inline";
-      </script>
-      <script type="text/javascript" src="http://spad.i-mobile.co.jp/script/adssp.js?20110215"></script>
     </div>
   </div>
 <% end %>
