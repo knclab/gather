@@ -1,144 +1,70 @@
 <% content_for :title do show_title end %>
 <% content_for :description do show_description end %>
 <% content_for :image do @media[:images][:thumbnail][:url] end %>
-<div class="container">
+<div class="row">
 
-  <%= render :partial => "/top/page_header" %>
+  <div class="col-lg-12">
+    <div class="thumbnail clearfix">
+      <%= link_to(image_tag(@media[:images][:standard_resolution][:url], class: "pull-left", alt: @media[:caption].try(:text)), @media[:link], target: "_blank") %>
+      <div class="row">
+        <div class="col-lg-5">
+          <p>
+            <%= image_tag(@media[:caption][:from][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
+            <b><%= @media[:user][:username] %></b>
+            <% if false %>
+            <b><%#= link_to(@media[:caption][:from][:username], user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></b>
+            <% end %>
+          </p>
 
-<% if false %>
-  <div class="page-header" id="banner">
-    <div class="row">
-      <div class="col-lg-8 col-md-7 col-sm-6">
-        <h1><%= @tag.category.name %></h1>
+          <div class="well well-sm" style="word-break:break-all"><%= @media[:caption].try(:text) %></div>
 
-        <ol class="breadcrumb">
-          <li><a href="<%= root_url %>">Home</a></li>
-          <li><a href="<%= list_url(@tag.category.id) %>"><%= @tag.category.name %></a></li>
-          <li class="active"><%= @media.media_id %></li>
-        </ol>
-
-        <%= render :partial => "/top/social_button.html.erb" %>
-      </div>
-      <%= render :partial => "/top/sponsor" %>
-    </div>
-  </div> <!-- /page-header -->
-<% end %>
-
-  <div class="row">
-
-    <div class="col-lg-12">
-      <div class="thumbnail clearfix">
-        <%= link_to(image_tag(@media[:images][:standard_resolution][:url], class: "pull-left", alt: @media[:caption].try(:text)), @media[:link], target: "_blank") %>
-        <div class="row">
-          <div class="col-lg-5">
-            <p>
-              <%= image_tag(@media[:caption][:from][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
-              <b><%= @media[:user][:username] %></b>
-              <% if false %>
-              <b><%#= link_to(@media[:caption][:from][:username], user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></b>
+          <div style="margin-bottom:20px;">
+            <div><span class="glyphicon glyphicon-thumbs-up"></span> <%= "#{@media[:likes][:count]}件" %></div>
+            <% if @media[:likes][:count].nonzero? %>
+              <p>
+              <% @media[:likes][:data][0..3].each do |user| %>
+                <span class="label label-default"><%= "#{user[:username]}" %></span>
+            <% if false %>
+                <a href="<%= user_url(user[:id]) %>" target="_blank"><span class="label label-default"><%= "#{user[:username]}" %></span></a>
+            <% end %>
               <% end %>
-            </p>
+              <% if @media[:likes][:count] > 4 %>...<% end %>
+              </p>
+            <% end %>
+          </div>
 
-            <div class="well well-sm" style="word-break:break-all"><%= @media[:caption].try(:text) %></div>
-
-            <div style="margin-bottom:20px;">
-              <div><span class="glyphicon glyphicon-thumbs-up"></span> <%= "#{@media[:likes][:count]}件" %></div>
-              <% if @media[:likes][:count].nonzero? %>
-                <p>
-                <% @media[:likes][:data][0..3].each do |user| %>
-                  <span class="label label-default"><%= "#{user[:username]}" %></span>
-              <% if false %>
-                  <a href="<%= user_url(user[:id]) %>" target="_blank"><span class="label label-default"><%= "#{user[:username]}" %></span></a>
-              <% end %>
-                <% end %>
-                <% if @media[:likes][:count] > 4 %>...<% end %>
+          <div style="margin-bottom:20px;">
+            <div><span class="glyphicon glyphicon-comment"></span> <%= "#{@media[:comments][:count]}件" %></div>
+            <% if @media[:comments][:count].nonzero? %>
+              <% @media[:comments][:data][0..5].each do |user| %>
+                <p style="word-break:break-all">
+                  <%= image_tag(user[:from][:profile_picture], style: "width:25px;height:25px;") %>
+                  <%= user[:from][:username] %>
+            <% if false %>
+                  <%#= link_to(user[:from][:username], user_url(user[:from][:id]), target: "_blank") %>
+            <% end %>
+                  <%= user[:text] %>
                 </p>
               <% end %>
-            </div>
-
-            <div style="margin-bottom:20px;">
-              <div><span class="glyphicon glyphicon-comment"></span> <%= "#{@media[:comments][:count]}件" %></div>
-              <% if @media[:comments][:count].nonzero? %>
-                <% @media[:comments][:data][0..5].each do |user| %>
-                  <p style="word-break:break-all">
-                    <%= image_tag(user[:from][:profile_picture], style: "width:25px;height:25px;") %>
-                    <%= user[:from][:username] %>
-              <% if false %>
-                    <%#= link_to(user[:from][:username], user_url(user[:from][:id]), target: "_blank") %>
-              <% end %>
-                    <%= user[:text] %>
-                  </p>
-                <% end %>
-              <% end %>
-            </div>
-
-          </div> <!-- /col-lg-4 -->
-        </div> <!-- /row -->
-
-      </div> <!-- /thumbnail -->
-
-    </div> <!-- /col-lg-12 -->
-
-<% if false %>
-    <% @tag.category.medias.sample(6).each do |media| %>
-      <a href="<%= show_url(tag_id: media.tag_id, media_id: media.media_id) %>">
-        <div class="col-xs-6 col-md-2">
-          <div class="thumbnail">
-            <img src="<%= media[:images][:thumbnail][:url] %>" class="" alt="Responsive image">
+            <% end %>
           </div>
-        </div>
-      </a>
-    <% end %>
-<% end %>
 
-  </div> <!-- /row -->
+        </div> <!-- /col-lg-4 -->
+      </div> <!-- /row -->
 
-<% if false %>
-    <div class="page-header">
-      <div>
-          <h4><%= link_to("#{@media[:user][:username]}さんの他の画像", user_url(@media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %></h4>
-      </div>
-    </div>
-    <div id="show_user_contents" class="row">
-    <% @user_results.each do |media| %>
-      <div class="show_user_box col-lg-4 col-sm-6 col-xs-12">
-        <div class="thumbnail">
-          <a href="<%= show_url(media[:id]) %>" target='_blnak'>
-            <img src="<%= media[:images][:low_resolution][:url] %>" class="" alt="">
-          </a>
-          <div class="caption">
-            <div class="row">
-              <div class="col-md-1 col-sm-2 col-xs-2">
-                <%= image_tag(media[:user][:profile_picture], class: "img-circle", style: "width:50px;height:50px;") %>
-              </div>
-              <div class="col-md-2 col-sm-2 col-xs-2 col-md-offset-1">
-                <%= link_to(media[:user][:username], user_url(media[:user][:id]), style: 'color:#000000;', target: "_blank" ) %>
-              </div>
-              <div class="col-md-10 col-xs-10 col-md-offset-1 text-right">
-                <span class="glyphicon glyphicon-thumbs-up"></span> <%= number_with_delimiter(media[:likes][:count]) %>
-                <span class="glyphicon glyphicon-comment"></span> <%= number_with_delimiter(media[:comments][:count]) %>
-              </div>
-            </div>
-            <div style="word-break:break-all">
-              <%= media[:caption].try(:text) %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    </div>
-<% end %>
+    </div> <!-- /thumbnail -->
 
-    <div id="topics" class="page-header">
-      <div>
-        <h4><%= link_to("おすすめ画像", root_url, style: 'color:#000000;', target: "_blank") %></h4>
-      </div>
-    </div>
-    <%= render :partial => "/top/contents" %>
+  </div> <!-- /col-lg-12 -->
 
-    <div class="text-center" style="margin-bottom:120px;">
-        <a href="<%= root_url %>" class="btn btn-default btn-lg" role="button">もっとみる <span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div>
+</div> <!-- /row -->
 
-</div> <!-- /container -->
+<div id="topics" class="page-header">
+  <div>
+    <h4><%= link_to("おすすめ画像", root_url, style: 'color:#000000;', target: "_blank") %></h4>
+  </div>
+</div>
+<%= render :partial => "/top/contents" %>
 
+<div class="text-center" style="margin-bottom:120px;">
+  <a href="<%= root_url %>" class="btn btn-default btn-lg" role="button">もっとみる <span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
