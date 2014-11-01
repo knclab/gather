@@ -6,7 +6,7 @@ module ApplicationHelper
 
   def show_title
     if params[:action] == 'show'
-      return "#{@media[:caption].try(:text)}|#{t('views.header.title')}"
+      return "#{@media.try(:caption).try(:text)}|#{t('views.header.title')}"
     elsif params[:action] == 'user'
       return "#{@user[:username]}のコーディネート|#{t('views.header.title')}"
     end
@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def show_description
     text = []
-    if params[:action] == 'show'
+    if params[:action] == 'show' && @media.present?
       text << "カテゴリー：ファッション,コーディネート"
       text << "タグ：#{@media[:tags].join(',')}" if @media[:tags].present?
       text << "投稿者：#{@media[:user][:username]}"
